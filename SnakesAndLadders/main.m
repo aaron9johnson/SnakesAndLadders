@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Player.h"
+#import "PlayerManager.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        PlayerManager *pManager = [PlayerManager new];
         Player *p1 = [Player new];
         bool game = true;
         while(game){
