@@ -31,6 +31,9 @@ int main(int argc, const char * argv[]) {
             if([inputString isEqualToString:@"roll"] || [inputString isEqualToString:@"r"]){
                 [pManager roll];
             }
+            if([inputString isEqualToString:@"quit"]){
+                break;
+            }
             NSLog(@"%@", [pManager output]);
             if(pManager.gameOver){
                 game = false;
