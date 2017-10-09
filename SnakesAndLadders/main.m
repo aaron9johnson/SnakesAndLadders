@@ -16,6 +16,8 @@ int main(int argc, const char * argv[]) {
         PlayerManager *pManager = [PlayerManager new];
         while(1){
             pManager.players = [NSMutableArray new];
+            pManager.gameOver = false;
+            pManager.currentIndex = 0;
             while(1){
                 NSString *temp = [InputManager userInput:@"Pick number of players: "];
                 if([temp integerValue] != nil){
