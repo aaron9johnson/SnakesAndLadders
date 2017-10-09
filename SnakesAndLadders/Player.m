@@ -34,22 +34,22 @@
 -(void)roll{
     NSMutableString *rollOutput = [NSMutableString new];
     NSInteger die = arc4random_uniform(6) + 1;
-    [rollOutput appendFormat:@"You rolled a %ld\n", (long)die];
+    [rollOutput appendFormat:@"%@ rolled a %ld\n", self.name, (long)die];
     self.currentSquare = self.currentSquare + die;
     if([self.gameLogic objectForKey:[[NSNumber alloc] initWithInt:(int)self.currentSquare]]){
         NSInteger temp = [self.gameLogic[[[NSNumber alloc] initWithInt:(int)self.currentSquare]] integerValue];
         if(temp < self.currentSquare){
-            [rollOutput appendFormat:@"You slide down a snake from %ld to %ld\n", (long)self.currentSquare, (long)temp];
+            [rollOutput appendFormat:@"%@ slides down a snake from %ld to %ld\n", self.name, (long)self.currentSquare, (long)temp];
         } else {
-            [rollOutput appendFormat:@"You climb up a ladder from %ld to %ld!\n", (long)self.currentSquare, (long)temp];
+            [rollOutput appendFormat:@"%@ climbs up a ladder from %ld to %ld!\n", self.name, (long)self.currentSquare, (long)temp];
         }
         self.currentSquare = temp;
     } else if(self.currentSquare >= 100){
         self.currentSquare = 100;
         self.gameOver = true;
-        [rollOutput appendFormat:@"You landed on 100! You Win!!"];
+        [rollOutput appendFormat:@"%@ landed on 100! You Win!!", self.name];
     } else {
-        [rollOutput appendFormat:@"You landed on %ld", (long)self.currentSquare];
+        [rollOutput appendFormat:@"%@ landed on %ld", self.name, (long)self.currentSquare];
     }
     self.output = rollOutput;
 }
