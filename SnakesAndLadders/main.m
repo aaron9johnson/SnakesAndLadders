@@ -15,31 +15,37 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         PlayerManager *pManager = [PlayerManager new];
         while(1){
-            NSString *temp = [InputManager userInput:@"Pick number of players: "];
-            if([temp integerValue] != nil){
-                int numPlayers = (int)[temp integerValue];
-                if (numPlayers != 0) {
-                    [pManager createPlayers:numPlayers];
+            pManager.players = [NSMutableArray new];
+            while(1){
+                NSString *temp = [InputManager userInput:@"Pick number of players: "];
+                if([temp integerValue] != nil){
+                    int numPlayers = (int)[temp integerValue];
+                    if (numPlayers != 0) {
+                        [pManager createPlayers:numPlayers];
+                        break;
+                    }
+                }
+                
+            }
+            bool game = true;
+            while(game){
+                NSString *inputString = [InputManager userInput:@"Type roll or r"];
+                if([inputString isEqualToString:@"roll"] || [inputString isEqualToString:@"r"]){
+                    [pManager roll];
+                }
+                if([inputString isEqualToString:@"quit"]){
                     break;
                 }
+                NSLog(@"%@", [pManager output]);
+                if(pManager.gameOver){
+                    game = false;
+                }
             }
-            
-        }
-        bool game = true;
-        while(game){
-            NSString *inputString = [InputManager userInput:@"Type roll or r"];
-            if([inputString isEqualToString:@"roll"] || [inputString isEqualToString:@"r"]){
-                [pManager roll];
-            }
-            if([inputString isEqualToString:@"quit"]){
+            if(![[InputManager userInput:@"replay or quit?"] isEqualToString:@"replay"]){
                 break;
             }
-            NSLog(@"%@", [pManager output]);
-            if(pManager.gameOver){
-                game = false;
-            }
         }
-        
+        NSLog(@"Thank you for playing!");
     }
     return 0;
 }

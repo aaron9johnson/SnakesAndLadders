@@ -14,6 +14,6 @@
     char inputChars[255];
     fgets(inputChars, 255, stdin);
     NSString *inputString = [NSString stringWithUTF8String:inputChars];
-    return [inputString substringToIndex:(inputString.length-1)];
+    return [[inputString substringToIndex:(inputString.length-1)] lowercaseString];
 }
 @end
